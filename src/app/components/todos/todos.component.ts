@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { threadId } from 'worker_threads';
 import {Todo} from '../../models/Todo';
 @Component({
   selector: 'app-todos',
