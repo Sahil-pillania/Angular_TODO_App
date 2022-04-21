@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {todos} from './../../models/todos';
+import { threadId } from 'worker_threads';
+import {Todo} from '../../models/Todo';
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
+ 
+  todos:any;
 
-  constructor() { }
-  todos:todos[] | undefined;
+  inputTodo:string ="";
+  constructor() {
 
-  ngOnInit(): void {
+   }
+
+   
+  ngOnInit():void {
     this.todos = [
       {
          content: 'first todo',
@@ -21,6 +27,25 @@ export class TodosComponent implements OnInit {
         completed:true
       }
     ]
+  }
+
+  toggleDone(id:any) {
+    this.todos.map((v:any, i:any) => {
+      if(i == id) v.completed = !v.completed;
+      return v;
+    })
+  }
+
+  deleteTodo(id:number){
+    this.todos = this.todos.filter((v:any, i:any) => i !== id); 
+  }
+
+  addTodo (){
+    this.todos.push({
+      content: this.inputTodo,
+      completed: false
+    });
+    this.inputTodo = "";
   }
 
 }
